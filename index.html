@@ -1,178 +1,63 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
 
-　　<!-- ホーム画面アイコン -->
-　　<link rel="apple-touch-icon"           href="icon.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta charset="UTF-8">
+  <!-- ホーム画面アイコン -->
+  <link rel="apple-touch-icon" href="icon.png">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+  <title>ポケモンさんすう</title>
 
-    <title>
-        ポケモン<br/>さんすう
-    </title>
+  <link rel="stylesheet" href="style.css">
 
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+  <!-- ⭐重要：defer -->
+  <script src="app.js" defer></script>
 
 </head>
 
 <body>
 
-    <!-- タイトル -->
+<header>
+  <h1>ポケモンさんすう</h1>
+  <button onclick="openDex()">📕ずかん</button>
+</header>
 
-    <header>
+<h2 id="pokemonName">ポケモン</h2>
 
-        <h1>
-            ポケモン<br/>さんすう
-        </h1>
+<div id="battleArea">
+  <div id="grass"></div>
 
-        <button
-            id="dexButton"
-            onclick="openDex()"
-        >
-            📕ずかん
-        </button>
+  <img id="pokemonImage" src="" alt="ポケモン">
+  <img id="ballImg" src="ball.png" alt="ボール">
+</div>
 
-    </header>
+<div id="message"></div>
 
-    <!-- ポケモン名 -->
+<div id="questionArea">
+  <h2 id="question">1 + 1 = ?</h2>
 
-    <h2 id="pokemonName">
-        ポケモン
-    </h2>
+  <input id="answerInput" type="number">
 
-    <!-- バトルエリア -->
+  <button onclick="checkAnswer()">こたえる</button>
+</div>
 
-    <div id="battleArea">
+<div id="catchArea" class="hidden">
+  <button onclick="throwBall()">ボールをなげる</button>
+</div>
 
-        <!-- 草むら -->
+<div id="nextArea" class="hidden">
+  <button onclick="nextPokemon()">つぎへ</button>
+</div>
 
-        <div id="grass"></div>
-
-        <!-- ポケモン -->
-
-        <img
-            id="pokemonImage"
-            src=""
-            alt="ポケモン"
-        >
-
-        <!-- ボール -->
-
-        <img
-            id="ballImg"
-            src="ball.png"
-            alt="モンスターボール"
-        >
-
-    </div>
-
-    <!-- メッセージ -->
-
-    <div id="message">
-
-    </div>
-
-    <!-- 問題エリア -->
-
-    <div id="questionArea">
-
-        <h2 id="question">
-            1 + 1 = ?
-        </h2>
-
-        <input
-            id="answerInput"
-            type="number"
-            autocomplete="off"
-        >
-
-        <br><br>
-
-        <button
-            id="answerButton"
-            onclick="checkAnswer()"
-        >
-            こたえる
-        </button>
-        
-		<button onclick="changePokemon()">
-			べつのポケモンにする
-		</button>
-		
-    </div>
-
-    <!-- 捕獲エリア -->
-
-    <div
-        id="catchArea"
-        class="hidden"
-    >
-
-        <button
-            id="throwButton"
-            onclick="throwBall()"
-        >
-            モンスターボールをなげる！
-        </button>
-
-    </div>
-
-    <!-- 次へ -->
-
-    <div
-        id="nextArea"
-        class="hidden"
-    >
-
-        <button
-            id="nextButton"
-            onclick="nextPokemon()"
-        >
-            つぎのもんだい
-        </button>
-
-    </div>
-
-    <!-- 図鑑 -->
-
-    <div
-        id="dexModal"
-        class="hidden"
-    >
-
-        <div class="modal">
-
-            <h2>
-                📖 ポケモン図鑑
-            </h2>
-
-            <div id="dexContent">
-
-            </div>
-
-            <br>
-
-            <button
-                onclick="closeDex()"
-            >
-                とじる
-            </button>
-
-        </div>
-
-    </div>
-
-    <script src="app.js"></script>
+<div id="dexModal" class="hidden">
+  <div class="modal">
+    <h2>ずかん</h2>
+    <div id="dexContent"></div>
+    <button onclick="closeDex()">とじる</button>
+  </div>
+</div>
 
 </body>
-
 </html>
