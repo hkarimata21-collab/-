@@ -112,204 +112,366 @@ const pokemonList = [
   { dexNo: 80, pokemonId: 251, name: "セレビィ" }
 ];
 
-// =====================
+// ====================
+// 状態管理
+// ====================
 
-// 状態
+let currentPokemon = null;
+let currentAnswer = 0;
+let catchCount = 0;
 
-// =====================
-
-let currentPokemon;
-
-let currentAnswer;
-
-// =====================
-
-// DOM（安全取得）
-
-// =====================
-
-const pokemonImage = document.getElementById("pokemonImage");
-
-const pokemonName = document.getElementById("pokemonName");
-
-const ballImg = document.getElementById("ballImg");
-
-const message = document.getElementById("message");
-
-const question = document.getElementById("question");
-
-const answerInput = document.getElementById("answerInput");
-
-const catchArea = document.getElementById("catchArea");
-
-const nextArea = document.getElementById("nextArea");
-
-// =====================
-
+// ====================
 // 初期化
+// ====================
 
-// =====================
-
-window.onload = () => {
-
-  console.log("INIT OK");
-
+window.addEventListener("load", () => {
   loadPokemon();
+});
 
-};
-
-// =====================
-
-// 画像
-
-// =====================
+// ====================
+// 画像URL生成
+// ====================
 
 function getPokemonImage(id) {
-
   return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
-
 }
 
-// =====================
-
-// ランダム
-
-// =====================
+// ====================
+// ランダムポケモン
+// ====================
 
 function getRandomPokemon() {
-
-  return pokemonList[Math.floor(Math.random() * pokemonList.length)];
-
+  return pokemonList[
+    Math.floor(Math.random() * pokemonList.length)
+  ];
 }
 
-// =====================
-
-// 問題
-
-// =====================
+// ====================
+// 問題生成
+// ====================
 
 function createQuestion() {
 
-  const a = Math.floor(Math.random() * 10) + 1;
+  const a =
+    Math.floor(Math.random() * 10) + 1;
 
-  const b = Math.floor(Math.random() * 10) + 1;
+  const b =
+    Math.floor(Math.random() * 10) + 1;
 
   currentAnswer = a + b;
 
-  question.textContent = `${a} + ${b} = ?`;
+  question.textContent =
+    `${a} + ${b} = ?`;
 
 }
 
-// =====================
-
-// ロード
-
-// =====================
+// ====================
+// ポケモン出現
+// ====================
 
 function loadPokemon() {
 
-  currentPokemon = getRandomPokemon();
-
-  pokemonName.textContent = currentPokemon.name;
-
-  pokemonImage.src = getPokemonImage(currentPokemon.pokemonId);
-
-  pokemonImage.style.display = "block";
+  ballImg.classList.remove("throw");
 
   ballImg.style.display = "none";
 
-  catchArea.classList.add("hidden");
+  pokemonImage.style.display = "block";
 
+  currentPokemon = getRandomPokemon();
+
+  pokemonName.textContent =
+    currentPokemon.name;
+
+  pokemonImage.src =
+    getPokemonImage(
+      currentPokemon.pokemonId
+    );
+
+  answerInput.value = "";
+
+  questionArea.classList.remove("hidden");
+  catchArea.classList.add("hidden");
   nextArea.classList.add("hidden");
 
-  message.textContent = `${currentPokemon.name}があらわれた！`;
+  message.textContent =
+    `${currentPokemon.name}が あらわれた！`;
 
   createQuestion();
 
 }
 
-// =====================
+function changePokemon() {
 
-// 回答
+    catchCount = 0;
 
-// =====================
+    loadPokemon();
+
+}
+
+// ====================
+// 回答判定
+// ====================
 
 function checkAnswer() {
 
-  const val = Number(answerInput.value);
+  const value =
+    answerInput.value.trim();
 
-  if (val === currentAnswer) {
+  if (value === "") {
+    return;
+  }
 
-    message.textContent = "せいかい！";
+  if (Number(value) === currentAnswer) {
+
+    questionArea.classList.add("hidden");
 
     catchArea.classList.remove("hidden");
 
+    message.textContent =
+      "せいかい！";
+
   } else {
 
-    message.textContent = "ちがうよ！";
+    ballImg.classList.remove("throw");
+    ballImg.style.display = "none";
+
+    pokemonImage.style.display = "block";
+
+    message.textContent =
+      "おしい！もういちどがんばれ！";
+
+    catchArea.classList.remove("hidden");
 
   }
 
 }
 
-// =====================
-
-// ボール
-
-// =====================
+// ====================
+// ボール投擲
+// ====================
 
 function throwBall() {
 
-  ballImg.style.display = "block";
+    message.textContent = "";
 
-  message.textContent = "ボールをなげた！";
+    ballImg.style.display = "block";
 
-  setTimeout(() => {
+    ballImg.classList.remove("throw");
+    ballImg.classList.remove("ball-shake");
 
-    pokemonImage.style.display = "none";
+    void ballImg.offsetWidth;
 
-    message.textContent = "つかまえた！？";
+    ballImg.classList.add("throw");
 
+    // 命中
     setTimeout(() => {
 
-      nextArea.classList.remove("hidden");
+        pokemonImage.style.display = "none";
 
     }, 1000);
 
-  }, 1000);
+    // ボールが1回揺れる
+    setTimeout(() => {
+
+        ballImg.classList.remove("ball-shake");
+
+        void ballImg.offsetWidth;
+
+        ballImg.classList.add("ball-shake");
+
+    }, 1800);
+
+    // 判定
+    setTimeout(() => {
+
+        catchPokemon();
+
+    }, 2500);
 
 }
 
-// =====================
+// ====================
+// 捕獲判定
+// ====================
 
-// 次
+function catchPokemon() {
 
-// =====================
+  catchCount++;
+
+  let success = false;
+
+  if (catchCount >= 5) {
+
+    success = true;
+
+  } else {
+
+    success =
+      Math.random() * 100 <
+      catchCount * 20;
+
+  }
+
+  if (success) {
+
+    savePokemon();
+
+    catchCount = 0;
+
+    message.textContent =
+      `${currentPokemon.name}をゲットだぜ！`;
+
+    questionArea.classList.add("hidden");
+    catchArea.classList.add("hidden");
+
+    nextArea.classList.remove("hidden");
+
+  } else {
+
+    ballImg.style.display = "none";
+
+    pokemonImage.style.display = "block";
+
+    message.textContent =
+      "おしい！もういちどがんばれ！";
+
+    catchArea.classList.remove("hidden");
+
+	}
+}
+
+// ====================
+// 次の問題
+// ====================
 
 function nextPokemon() {
-
-  pokemonImage.style.display = "block";
-
-  answerInput.value = "";
 
   loadPokemon();
 
 }
 
-// =====================
+// ====================
+// 図鑑保存
+// ====================
 
-// 図鑑（簡易）
+function savePokemon() {
 
-// =====================
+  const dex =
+    JSON.parse(
+      localStorage.getItem("dex") || "[]"
+    );
 
-function openDex() {
+  if (
+    !dex.includes(
+      currentPokemon.dexNo
+    )
+  ) {
 
-  document.getElementById("dexModal").classList.remove("hidden");
+    dex.push(
+      currentPokemon.dexNo
+    );
+
+  }
+
+  localStorage.setItem(
+    "dex",
+    JSON.stringify(dex)
+  );
 
 }
 
+// ====================
+// 図鑑一覧
+// ====================
+
+function renderDex() {
+
+  const dex =
+    JSON.parse(
+      localStorage.getItem("dex") || "[]"
+    );
+
+  let html = "";
+
+  pokemonList.forEach(p => {
+
+    const owned =
+      dex.includes(
+        p.dexNo
+      );
+
+    html += `
+      <div
+        class="dexItem"
+        onclick="showPokemon(${p.dexNo})"
+      >
+        ${owned ? p.name : "？？？"}
+      </div>
+    `;
+
+  });
+
+  dexContent.innerHTML = html;
+
+}
+
+// ====================
+// 図鑑詳細
+// ====================
+
+function showPokemon(no) {
+
+  const dex =
+    JSON.parse(
+      localStorage.getItem("dex") || "[]"
+    );
+
+  if (!dex.includes(no)) {
+    return;
+  }
+
+  const p =
+    pokemonList.find(
+      x => x.dexNo === no
+    );
+
+  dexContent.innerHTML = `
+    <button onclick="renderDex()">
+      ← もどる
+    </button>
+
+    <h3>${p.name}</h3>
+
+    <img
+      src="${getPokemonImage(p.pokemonId)}"
+      width="180"
+    >
+  `;
+
+}
+
+// ====================
+// 図鑑開く
+// ====================
+
+function openDex() {
+
+  renderDex();
+
+  dexModal.classList.remove(
+    "hidden"
+  );
+
+}
+
+// ====================
+// 図鑑閉じる
+// ====================
+
 function closeDex() {
 
-  document.getElementById("dexModal").classList.add("hidden");
+  dexModal.classList.add(
+    "hidden"
+  );
 
 }
