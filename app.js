@@ -271,7 +271,7 @@ function throwBall() {
   // 捕獲判定
   setTimeout(() => {
     catchPokemon();
-  }, 3800);
+  }, 1000);
 }
 
 function nextPokemon() {
