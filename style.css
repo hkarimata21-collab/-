@@ -160,7 +160,7 @@ header {
 
 /* ★3回揺れ */
 .shake-3 {
-  animation: shake3 0.6s ease-in-out 3;
+  animation: shake3 0.8s ease-in-out 3;
 }
 
 /* =====================
