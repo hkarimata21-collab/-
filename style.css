@@ -2,490 +2,279 @@
    共通
 ===================== */
 
-*{
-    box-sizing:border-box;
+* {
+  box-sizing: border-box;
 }
 
-body{
-    margin:0;
-    padding:20px;
-    font-family:
-        "Hiragino Sans",
-        "Yu Gothic",
-        sans-serif;
-
-    text-align:center;
-
-    background:#f5f7fa;
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+  text-align: center;
+  background: #bfe9ff;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }
 
-h1{
-    margin-top:10px;
+h1 {
+  margin-top: 10px;
 }
 
-button{
-    border:none;
-    border-radius:12px;
-
-    padding:12px 20px;
-
-    font-size:18px;
-    font-weight:bold;
-
-    cursor:pointer;
+button {
+  border: none;
+  border-radius: 14px;
+  padding: 14px 18px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  background: #ffcb05;
 }
 
-button:active{
-    transform:scale(.96);
+button:active {
+  transform: scale(0.96);
 }
 
-input{
-    width:120px;
-
-    font-size:28px;
-    text-align:center;
-
-    padding:8px;
-
-    border-radius:10px;
-    border:2px solid #ccc;
+input {
+  width: 120px;
+  font-size: 28px;
+  text-align: center;
+  padding: 8px;
+  border-radius: 10px;
+  border: 2px solid #ccc;
 }
 
-.hidden{
-    display:none !important;
+.hidden {
+  display: none !important;
 }
 
 /* =====================
    ヘッダー
 ===================== */
 
-header{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:12px;
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
 }
 
 /* =====================
    メッセージ
 ===================== */
 
-#message{
-    min-height:40px;
-
-    font-size:24px;
-    font-weight:bold;
-
-    margin:15px 0;
+#message {
+  min-height: 40px;
+  font-size: 22px;
+  font-weight: bold;
+  margin: 10px 0;
 }
 
 /* =====================
    バトルエリア
 ===================== */
 
-#battleArea{
-
-    position:relative;
-
-    width:340px;
-    height:340px;
-
-    margin:20px auto;
-
-    overflow:hidden;
-
-    border-radius:24px;
-
-    background:
-        linear-gradient(
-            to bottom,
-            #8fd3ff 0%,
-            #dff6ff 60%,
-            #9ae69a 100%
-        );
-
-    box-shadow:
-        0 0 12px rgba(0,0,0,.15);
-
+#battleArea {
+  position: relative;
+  width: 340px;
+  height: 340px;
+  margin: 20px auto;
+  overflow: hidden;
+  border-radius: 24px;
+  background: linear-gradient(to bottom, #8fd3ff, #dff6ff 60%, #9ae69a);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
 }
 
 /* =====================
    草むら
 ===================== */
 
-#grass{
-
-    position:absolute;
-
-    left:0;
-    bottom:0;
-
-    width:100%;
-    height:130px;
-
-    background:
-        url("grass.png");
-
-    background-size:cover;
-    background-repeat:no-repeat;
-    background-position:center;
-
-    z-index:5;
-
+#grass {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 130px;
+  background: url("grass.png") center/cover no-repeat;
+  z-index: 5;
 }
 
 /* =====================
    ポケモン
 ===================== */
 
-#pokemonImage{
-
-    position:absolute;
-
-    width:190px;
-    height:190px;
-
-    left:50%;
-    bottom:60px;
-
-    transform:
-        translateX(-50%);
-
-    z-index:10;
-
-    image-rendering:pixelated;
-
-    animation:
-        floatPokemon 2s ease-in-out infinite;
-}
-
-@keyframes floatPokemon{
-
-    0%{
-        transform:
-            translateX(-50%)
-            translateY(0);
-    }
-
-    50%{
-        transform:
-            translateX(-50%)
-            translateY(-10px);
-    }
-
-    100%{
-        transform:
-            translateX(-50%)
-            translateY(0);
-    }
-
+#pokemonImage {
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  left: 50%;
+  bottom: 60px;
+  transform: translateX(-50%);
+  z-index: 10;
+  image-rendering: pixelated;
+  transition: 0.2s;
 }
 
 /* =====================
    モンスターボール
 ===================== */
 
-#ballImg{
-
-    position:absolute;
-
-    width:80px;
-    height:80px;
-
-    left:50%;
-    bottom:20px;
-
-    transform:
-        translateX(-50%);
-
-    z-index:20;
-
-    display:none;
+#ballImg {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: none;
 }
 
-/* ボール投擲 */
-
-.throw{
-
-    display:block !important;
-
-    animation:
-        throwBall 1s ease-out forwards;
-
+/* 投げアニメーション */
+.throw {
+  display: block !important;
+  animation: throwBall 1s ease-out forwards;
 }
 
-@keyframes throwBall{
+@keyframes throwBall {
+  0% {
+    transform: translate(-200px, 100px) rotate(0deg);
+  }
+  100% {
+    transform: translate(0, -100px) rotate(720deg);
+  }
+}
 
-    0%{
+/* =====================
+   ボール揺れ（3回）
+===================== */
 
-        transform:
-            translate(-200px,100px)
-            rotate(0deg);
+@keyframes shake3 {
+  0% { transform: translate(-50%, -100px) rotate(0); }
+  20% { transform: translate(-52%, -100px) rotate(-10deg); }
+  40% { transform: translate(-48%, -100px) rotate(10deg); }
+  60% { transform: translate(-52%, -100px) rotate(-8deg); }
+  80% { transform: translate(-48%, -100px) rotate(8deg); }
+  100% { transform: translate(-50%, -100px) rotate(0); }
+}
 
-    }
-
-    100%{
-
-        transform:
-            translate(0,-100px)
-            rotate(720deg);
-
-    }
-
+.shake-3 {
+  animation: shake3 0.6s ease-in-out 3;
 }
 
 /* =====================
    問題エリア
 ===================== */
 
-#questionArea{
-
-    margin-top:20px;
-
+#questionArea {
+  margin-top: 20px;
 }
 
-#question{
-
-    font-size:32px;
-
+#question {
+  font-size: 32px;
 }
 
 /* =====================
-   捕獲エリア
+   捕獲・次へ
 ===================== */
 
-#catchArea{
-
-    margin-top:20px;
-
+#catchArea,
+#nextArea {
+  margin-top: 20px;
 }
 
 /* =====================
-   次へ
+   図鑑
 ===================== */
 
-#nextArea{
+#dexModal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+  overflow: auto;
+}
 
-    margin-top:20px;
+.modal {
+  background: white;
+  width: 90%;
+  max-width: 650px;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 20px;
+}
 
+.dexItem {
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  background: #fafafa;
+}
+
+.dexItem:hover {
+  transform: scale(1.02);
+}
+
+#dexContent img {
+  width: 200px;
+  height: 200px;
 }
 
 /* =====================
-   図鑑モーダル
+   スマホ
 ===================== */
 
-#dexModal{
+@media (max-width: 480px) {
+  #battleArea {
+    width: 300px;
+    height: 300px;
+  }
 
-    position:fixed;
+  #pokemonImage {
+    width: 170px;
+    height: 170px;
+  }
 
-    inset:0;
+  #question {
+    font-size: 28px;
+  }
 
-    background:
-        rgba(0,0,0,.7);
-
-    z-index:999;
-
-    overflow:auto;
-
-}
-
-.modal{
-
-    background:white;
-
-    width:90%;
-    max-width:650px;
-
-    margin:30px auto;
-
-    padding:20px;
-
-    border-radius:20px;
-
+  button {
+    font-size: 18px;
+  }
 }
 
 /* =====================
-   図鑑一覧
+   PC
 ===================== */
-
-.dexItem{
-
-    padding:12px;
-
-    margin:8px 0;
-
-    border-radius:12px;
-
-    border:1px solid #ddd;
-
-    cursor:pointer;
-
-    background:#fafafa;
-
-    transition:.2s;
-}
-
-.dexItem:hover{
-
-    transform:scale(1.02);
-
-}
-
-/* =====================
-   図鑑詳細画像
-===================== */
-
-#dexContent img{
-
-    width:200px;
-    height:200px;
-
-}
-
-/* =====================
-   スマホ対応
-===================== */
-
-@media (max-width:480px){
-
-    #battleArea{
-
-        width:300px;
-        height:300px;
-
-    }
-
-    #pokemonImage{
-
-        width:170px;
-        height:170px;
-
-    }
-
-    #question{
-
-        font-size:28px;
-
-    }
-
-    #message{
-
-        font-size:20px;
-
-    }
-
-}
-
-/* =====================
-   捕獲時のボール揺れ
-===================== */
-
-.ball-shake {
-
-    animation:
-        ballShake 0.5s ease;
-
-}
-
-@keyframes ballShake {
-
-    0% {
-        transform:
-            translate(0,-100px)
-            rotate(0deg);
-    }
-
-    25% {
-        transform:
-            translate(-8px,-100px)
-            rotate(-15deg);
-    }
-
-    50% {
-        transform:
-            translate(8px,-100px)
-            rotate(15deg);
-    }
-
-    75% {
-        transform:
-            translate(-4px,-100px)
-            rotate(-8deg);
-    }
-
-    100% {
-        transform:
-            translate(0,-100px)
-            rotate(0deg);
-    }
-
-}
 
 @media (min-width: 768px) {
+  #battleArea {
+    width: 500px;
+    height: 500px;
+  }
 
-    body {
-        font-size: 18px;
-    }
+  #pokemonImage {
+    width: 260px;
+    height: 260px;
+  }
 
-    #battleArea {
-        width: 500px;
-        height: 500px;
-    }
+  #question {
+    font-size: 42px;
+  }
 
-    #pokemonImage {
-        width: 260px;
-        height: 260px;
-    }
+  input {
+    width: 160px;
+    font-size: 34px;
+  }
 
-    #ballImg {
-        width: 110px;
-        height: 110px;
-    }
+  button {
+    font-size: 24px;
+  }
 
-    #question {
-        font-size: 42px;
-    }
-
-    input {
-        width: 160px;
-        font-size: 34px;
-    }
-
-    button {
-        font-size: 24px;
-        padding: 16px 28px;
-    }
-
-    #message {
-        font-size: 28px;
-    }
-
-}
-
-/* =====================
-
-   捕獲時ボール揺れ（追加ここ）
-
-===================== */
-
-@keyframes shake3 {
-
-  0% { transform: translate(-50%, -100px) rotate(0); }
-
-  20% { transform: translate(-52%, -100px) rotate(-10deg); }
-
-  40% { transform: translate(-48%, -100px) rotate(10deg); }
-
-  60% { transform: translate(-52%, -100px) rotate(-8deg); }
-
-  80% { transform: translate(-48%, -100px) rotate(8deg); }
-
-  100% { transform: translate(-50%, -100px) rotate(0); }
-
-}
-
-.shake-3 {
-
-  animation: shake3 0.6s ease-in-out 3;
-
+  #message {
+    font-size: 28px;
+  }
 }
