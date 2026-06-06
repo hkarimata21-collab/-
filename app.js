@@ -326,17 +326,7 @@ function catchPokemon() {
   catchArea.classList.remove("hidden");
 
   nextArea.classList.add("hidden");
-　}
-}
-
-// ====================
-// 次の問題
-// ====================
-
-function nextPokemon() {
-
-  loadPokemon();
-
+  }
 }
 
 // ====================
