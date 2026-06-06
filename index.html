@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        ポケモン<br/>さんすう
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+<body>
+
+    <!-- タイトル -->
+
+    <header>
+
+        <h1>
+            ポケモン<br/>さんすう
+        </h1>
+
+        <button
+            id="dexButton"
+            onclick="openDex()"
+        >
+            📕ずかん
+        </button>
+
+    </header>
+
+    <!-- ポケモン名 -->
+
+    <h2 id="pokemonName">
+        ポケモン
+    </h2>
+
+    <!-- バトルエリア -->
+
+    <div id="battleArea">
+
+        <!-- 草むら -->
+
+        <div id="grass"></div>
+
+        <!-- ポケモン -->
+
+        <img
+            id="pokemonImage"
+            src=""
+            alt="ポケモン"
+        >
+
+        <!-- ボール -->
+
+        <img
+            id="ballImg"
+            src="ball.png"
+            alt="モンスターボール"
+        >
+
+    </div>
+
+    <!-- メッセージ -->
+
+    <div id="message">
+
+    </div>
+
+    <!-- 問題エリア -->
+
+    <div id="questionArea">
+
+        <h2 id="question">
+            1 + 1 = ?
+        </h2>
+
+        <input
+            id="answerInput"
+            type="number"
+            autocomplete="off"
+        >
+
+        <br><br>
+
+        <button
+            id="answerButton"
+            onclick="checkAnswer()"
+        >
+            こたえる
+        </button>
+        
+		<button onclick="changePokemon()">
+			べつのポケモンにする
+		</button>
+		
+    </div>
+
+    <!-- 捕獲エリア -->
+
+    <div
+        id="catchArea"
+        class="hidden"
+    >
+
+        <button
+            id="throwButton"
+            onclick="throwBall()"
+        >
+            モンスターボールをなげる！
+        </button>
+
+    </div>
+
+    <!-- 次へ -->
+
+    <div
+        id="nextArea"
+        class="hidden"
+    >
+
+        <button
+            id="nextButton"
+            onclick="nextPokemon()"
+        >
+            つぎのもんだい
+        </button>
+
+    </div>
+
+    <!-- 図鑑 -->
+
+    <div
+        id="dexModal"
+        class="hidden"
+    >
+
+        <div class="modal">
+
+            <h2>
+                📖 ポケモン図鑑
+            </h2>
+
+            <div id="dexContent">
+
+            </div>
+
+            <br>
+
+            <button
+                onclick="closeDex()"
+            >
+                とじる
+            </button>
+
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>
