@@ -274,6 +274,18 @@ function throwBall() {
   }, 2500);
 }
 
+function nextPokemon() {
+
+  loadPokemon();
+
+  ballImg.style.display = "none";
+  ballImg.classList.remove("shake-3");
+  ballImg.classList.remove("throw");
+
+  catchArea.classList.add("hidden");
+  nextArea.classList.add("hidden");
+}
+
 // ====================
 // 捕獲判定
 // ====================
@@ -302,19 +314,19 @@ function catchPokemon() {
 
     nextArea.classList.remove("hidden");
 
-  } else {
+} else {
 
-    // ❌失敗時：ここ重要
-    ballImg.style.display = "none";   // ←必ず消す
-    ballImg.classList.remove("throw");
-    ballImg.classList.remove("ball-shake");
+  ballImg.style.display = "none";
 
-    pokemonImage.style.display = "block";
+  pokemonImage.style.display = "block";
 
-    message.textContent = "おしい！もういちどがんばれ！";
+  message.textContent = "おしい！もういちどがんばれ！";
 
-    catchArea.classList.add("hidden"); // ←ボタンも消す
-  }
+  // ★ここ追加（重要）
+  catchArea.classList.remove("hidden");
+
+  nextArea.classList.add("hidden");
+　}
 }
 
 // ====================
