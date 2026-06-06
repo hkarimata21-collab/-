@@ -266,7 +266,7 @@ function throwBall() {
   // ポケモン非表示
   setTimeout(() => {
     pokemonImage.style.display = "none";
-  }, 1000);
+  }, 2400);
 
   // 捕獲判定
   setTimeout(() => {
