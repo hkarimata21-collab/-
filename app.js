@@ -242,42 +242,36 @@ function checkAnswer() {
 
 function throwBall() {
 
-    message.textContent = "";
+  message.textContent = "";
 
-    ballImg.style.display = "block";
+  ballImg.style.display = "block";
 
-    ballImg.classList.remove("throw");
-    ballImg.classList.remove("ball-shake");
+  // throwアニメーションリセット
+  ballImg.classList.remove("throw");
+  ballImg.classList.remove("shake-3");
 
-    void ballImg.offsetWidth;
+  // 再描画リセット（超重要）
+  void ballImg.offsetWidth;
 
-    ballImg.classList.add("throw");
+  // 投げるアニメーション
+  ballImg.classList.add("throw");
 
-    // 命中
-    setTimeout(() => {
+  // ★着地後に3回揺れ
+  setTimeout(() => {
 
-        pokemonImage.style.display = "none";
+    ballImg.classList.add("shake-3");
 
-    }, 1000);
+  }, 1000);
 
-    // ボールが1回揺れる
-    setTimeout(() => {
+  // ポケモン非表示
+  setTimeout(() => {
+    pokemonImage.style.display = "none";
+  }, 1000);
 
-        ballImg.classList.remove("ball-shake");
-
-        void ballImg.offsetWidth;
-
-        ballImg.classList.add("ball-shake");
-
-    }, 1800);
-
-    // 判定
-    setTimeout(() => {
-
-        catchPokemon();
-
-    }, 2500);
-
+  // 捕獲判定
+  setTimeout(() => {
+    catchPokemon();
+  }, 2500);
 }
 
 // ====================
