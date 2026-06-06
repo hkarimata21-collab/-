@@ -214,12 +214,9 @@ function changePokemon() {
 
 function checkAnswer() {
 
-  const value =
-    answerInput.value.trim();
+  const value = answerInput.value.trim();
 
-  if (value === "") {
-    return;
-  }
+  if (value === "") return;
 
   if (Number(value) === currentAnswer) {
 
@@ -227,23 +224,16 @@ function checkAnswer() {
 
     catchArea.classList.remove("hidden");
 
-    message.textContent =
-      "せいかい！";
+    message.textContent = "せいかい！";
 
   } else {
 
-    ballImg.classList.remove("throw");
-    ballImg.style.display = "none";
+    // ❌不正解 → 絶対にボール出さない
+    catchArea.classList.add("hidden");
+    nextArea.classList.add("hidden");
 
-    pokemonImage.style.display = "block";
-
-    message.textContent =
-      "おしい！もういちどがんばれ！";
-
-    catchArea.classList.remove("hidden");
-
+    message.textContent = "おしい！もういちどがんばれ！";
   }
-
 }
 
 // ====================
@@ -301,25 +291,17 @@ function catchPokemon() {
   let success = false;
 
   if (catchCount >= 5) {
-
     success = true;
-
   } else {
-
-    success =
-      Math.random() * 100 <
-      catchCount * 20;
-
+    success = Math.random() * 100 < catchCount * 20;
   }
 
   if (success) {
 
     savePokemon();
-
     catchCount = 0;
 
-    message.textContent =
-      `${currentPokemon.name}をゲットだぜ！`;
+    message.textContent = `${currentPokemon.name}をゲットだぜ！`;
 
     questionArea.classList.add("hidden");
     catchArea.classList.add("hidden");
@@ -328,16 +310,17 @@ function catchPokemon() {
 
   } else {
 
-    ballImg.style.display = "none";
+    // ❌失敗時：ここ重要
+    ballImg.style.display = "none";   // ←必ず消す
+    ballImg.classList.remove("throw");
+    ballImg.classList.remove("ball-shake");
 
     pokemonImage.style.display = "block";
 
-    message.textContent =
-      "おしい！もういちどがんばれ！";
+    message.textContent = "おしい！もういちどがんばれ！";
 
-    catchArea.classList.remove("hidden");
-
-	}
+    catchArea.classList.add("hidden"); // ←ボタンも消す
+  }
 }
 
 // ====================
