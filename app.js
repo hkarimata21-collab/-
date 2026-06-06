@@ -266,12 +266,12 @@ function throwBall() {
   // ポケモン非表示
   setTimeout(() => {
     pokemonImage.style.display = "none";
-  }, 3400);
+  }, 2400);
 
   // 捕獲判定
   setTimeout(() => {
     catchPokemon();
-  }, 3500);
+  }, 2500);
 }
 
 function nextPokemon() {
