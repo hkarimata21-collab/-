@@ -461,3 +461,31 @@ header{
     }
 
 }
+
+/* =====================
+
+   捕獲時ボール揺れ（追加ここ）
+
+===================== */
+
+@keyframes shake3 {
+
+  0% { transform: translate(-50%, -100px) rotate(0); }
+
+  20% { transform: translate(-52%, -100px) rotate(-10deg); }
+
+  40% { transform: translate(-48%, -100px) rotate(10deg); }
+
+  60% { transform: translate(-52%, -100px) rotate(-8deg); }
+
+  80% { transform: translate(-48%, -100px) rotate(8deg); }
+
+  100% { transform: translate(-50%, -100px) rotate(0); }
+
+}
+
+.shake-3 {
+
+  animation: shake3 0.6s ease-in-out 3;
+
+}
