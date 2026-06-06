@@ -114,7 +114,7 @@ const pokemonList = [
 
 // ====================
 
-// 状態管理
+// 状態
 
 // ====================
 
@@ -123,12 +123,6 @@ let currentPokemon = null;
 let currentAnswer = 0;
 
 let catchCount = 0;
-
-// ⭐追加：ゲーム状態管理
-
-let gameState = "question"; 
-
-// "question" | "catch" | "success"
 
 // ====================
 
@@ -144,7 +138,7 @@ window.addEventListener("load", () => {
 
 // ====================
 
-// 画像URL
+// 画像
 
 // ====================
 
@@ -154,25 +148,15 @@ function getPokemonImage(id) {
 
 }
 
-// ====================
-
-// ランダムポケモン
-
-// ====================
-
 function getRandomPokemon() {
 
-  return pokemonList[
-
-    Math.floor(Math.random() * pokemonList.length)
-
-  ];
+  return pokemonList[Math.floor(Math.random() * pokemonList.length)];
 
 }
 
 // ====================
 
-// 問題作成
+// 問題生成
 
 // ====================
 
@@ -190,7 +174,7 @@ function createQuestion() {
 
 // ====================
 
-// ポケモン表示
+// ポケモン表示（初期化）
 
 // ====================
 
@@ -208,8 +192,6 @@ function loadPokemon() {
 
   answerInput.value = "";
 
-  // UIリセット
-
   questionArea.classList.remove("hidden");
 
   catchArea.classList.add("hidden");
@@ -218,7 +200,7 @@ function loadPokemon() {
 
   message.textContent = `${currentPokemon.name}が あらわれた！`;
 
-  gameState = "question";
+  catchCount = 0;
 
   createQuestion();
 
@@ -226,7 +208,7 @@ function loadPokemon() {
 
 // ====================
 
-// 回答チェック（修正ポイント）
+// 回答チェック
 
 // ====================
 
@@ -238,31 +220,21 @@ function checkAnswer() {
 
   if (Number(value) === currentAnswer) {
 
-    // ✅正解 → 捕獲モード
-
-    gameState = "catch";
+    // 正解 → ボール投げOK
 
     questionArea.classList.add("hidden");
 
     catchArea.classList.remove("hidden");
 
-    nextArea.classList.add("hidden");
-
     message.textContent = "せいかい！";
 
   } else {
 
-    // ❌不正解 → 捕獲モードに入れない
-
-    gameState = "question";
-
-    message.textContent = "おしい！もういちどがんばれ！";
-
-    // ボール系は絶対出さない
+    // 不正解 → ボール禁止
 
     catchArea.classList.add("hidden");
 
-    nextArea.classList.add("hidden");
+    message.textContent = "おしい！もういちどがんばれ！";
 
   }
 
@@ -270,33 +242,33 @@ function checkAnswer() {
 
 // ====================
 
-// ボール投げ
+// ボール投げ（3回揺れ）
 
 // ====================
 
 function throwBall() {
 
-  // ⭐安全ガード（バグ防止）
-
-  if (gameState !== "catch") return;
-
   message.textContent = "";
 
   ballImg.style.display = "block";
 
-  ballImg.classList.remove("throw");
+  // 揺れ3回
+
+  ballImg.classList.remove("shake");
 
   void ballImg.offsetWidth;
 
-  ballImg.classList.add("throw");
+  ballImg.classList.add("shake-3");
 
   setTimeout(() => {
+
+    // ポケモン消える（当たり演出）
 
     pokemonImage.style.display = "none";
 
     catchPokemon();
 
-  }, 1000);
+  }, 1200);
 
 }
 
@@ -310,29 +282,21 @@ function catchPokemon() {
 
   catchCount++;
 
-  let success = false;
+  let success =
 
-  if (catchCount >= 5) {
+    catchCount >= 5
 
-    success = true;
+      ? true
 
-  } else {
-
-    success = Math.random() * 100 < catchCount * 20;
-
-  }
+      : Math.random() * 100 < catchCount * 20;
 
   if (success) {
 
-    gameState = "success";
+    // 成功 → ボールだけ残す
 
     savePokemon();
 
-    catchCount = 0;
-
     message.textContent = `${currentPokemon.name}をゲットだぜ！`;
-
-    questionArea.classList.add("hidden");
 
     catchArea.classList.add("hidden");
 
@@ -340,21 +304,15 @@ function catchPokemon() {
 
   } else {
 
-    // ❌逃走
+    // 失敗 → ボール消してポケモン復活
 
     ballImg.style.display = "none";
 
     pokemonImage.style.display = "block";
 
-    gameState = "question";
-
     message.textContent = "おしい！もういちどがんばれ！";
 
-    catchArea.classList.add("hidden");
-
-    questionArea.classList.remove("hidden");
-
-    createQuestion();
+    catchArea.classList.remove("hidden");
 
   }
 
@@ -362,7 +320,7 @@ function catchPokemon() {
 
 // ====================
 
-// 次へ
+// 次の問題（完全リセット）
 
 // ====================
 
@@ -370,17 +328,11 @@ function nextPokemon() {
 
   loadPokemon();
 
-  // UI完全リセット
-
-  gameState = "question";
+  // ボール完全リセット
 
   ballImg.style.display = "none";
 
-  catchArea.classList.add("hidden");
-
-  nextArea.classList.add("hidden");
-
-  questionArea.classList.remove("hidden");
+  pokemonImage.style.display = "block";
 
   message.textContent = "";
 
@@ -402,77 +354,7 @@ function savePokemon() {
 
   }
 
-  localStorage.setItem("dex", JSON.stringify(dex));
-
-}
-
-// ====================
-
-// 図鑑
-
-// ====================
-
-function renderDex() {
-
-  const dex = JSON.parse(localStorage.getItem("dex") || "[]");
-
-  let html = "";
-
-  pokemonList.forEach(p => {
-
-    const owned = dex.includes(p.dexNo);
-
-    html += `
-
-      <div class="dexItem" onclick="showPokemon(${p.dexNo})">
-
-        ${owned ? p.name : "？？？"}
-
-      </div>
-
-    `;
-
-  });
-
-  dexContent.innerHTML = html;
-
-}
-
-// ====================
-
-// 図鑑詳細
-
-// ====================
-
-function showPokemon(no) {
-
-  const dex = JSON.parse(localStorage.getItem("dex") || "[]");
-
-  if (!dex.includes(no)) return;
-
-  const p = pokemonList.find(x => x.dexNo === no);
-
-  dexContent.innerHTML = `
-
-    <button onclick="renderDex()">← もどる</button>
-
-    <h3>${p.name}</h3>
-
-    <img src="${getPokemonImage(p.pokemonId)}" width="180">
-
-  `;
-
-}
-
-// ====================
-
-// 図鑑開閉
-
-// ====================
-
-function openDex() {
-
-  renderDex();
+  localStorage.setItem("dex", JSON.stringify(dex));  renderDex();
 
   dexModal.classList.remove("hidden");
 
@@ -481,3 +363,4 @@ function openDex() {
 function closeDex() {
 
   dexModal.classList.add("hidden");}
+}
