@@ -261,7 +261,7 @@ function throwBall() {
 
     ballImg.classList.add("shake-3");
 
-  }, 1000);
+  }, 2400);
 
   // ポケモン非表示
   setTimeout(() => {
