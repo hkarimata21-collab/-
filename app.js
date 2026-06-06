@@ -261,17 +261,17 @@ function throwBall() {
 
     ballImg.classList.add("shake-3");
 
-  }, 2400);
+  }, 1000);
 
   // ポケモン非表示
   setTimeout(() => {
     pokemonImage.style.display = "none";
-  }, 2400);
+  }, 3400);
 
   // 捕獲判定
   setTimeout(() => {
     catchPokemon();
-  }, 2500);
+  }, 3500);
 }
 
 function nextPokemon() {
