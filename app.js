@@ -277,7 +277,8 @@ function throwBall() {
 function nextPokemon() {
 
   catchEffect.classList.remove("catch-show");
-
+  catchEffect.style.display = "none";
+  
   loadPokemon();
 
   ballImg.style.display = "none";
