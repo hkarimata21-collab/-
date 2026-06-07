@@ -302,9 +302,9 @@ header {
 
   -webkit-text-stroke: 1px white;
 
-  /*text-shadow:
-    0 4px 0 #d40000,
-    0 6px 8px rgba(0,0,0,0.4);*/
+  text-shadow:
+    0 3px 0 #d40000,
+    0 4px 6px rgba(0,0,0,0.4);
 
   z-index: 30;
 
@@ -367,18 +367,33 @@ header {
 .numberRow{
   display:flex;
   justify-content:center;
-  gap
+  gap:0px;
 }
 
 .numberRow img{
   width:40px;
   height:40px;
-  flex-wrap:wrap;
+  image-rendering:pixelated;
+}
 
 .plusSign{
   font-size:25px;
   font-weight:bold;
   margin-top:35px;
+}
+
+/* iPad */
+@media (min-width:768px){
+
+  .numberRow img{
+    width:72px;
+    height:72px;
+  }
+
+  .plusSign{
+    font-size:40px;
+  }
+
 }
 
 /* iPad */
