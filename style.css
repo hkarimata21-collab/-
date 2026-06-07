@@ -1,4 +1,4 @@
-/* =====================
+(/* =====================
    共通
 ===================== */
 
@@ -354,8 +354,9 @@ header {
   display:flex;
   justify-content:center;
   align-items:flex-start;
-  gap:30px;
-  margin:15px 0;
+  gap:24px;
+  margin:20px 0;
+  flex-wrap:wrap;
 }
 
 .numberGroup{
@@ -367,16 +368,18 @@ header {
 .numberRow{
   display:flex;
   justify-content:center;
+  min-height:50px;
 }
 
 .numberRow img{
-  width:40px;
-  height:40px;
+  width:50px;
+  height:50px;
   image-rendering:pixelated;
 }
 
 .plusSign{
-  font-size:40px;
+  font-size:56px;
   font-weight:bold;
-  margin-top:20px;
+  line-height:1;
+  margin-top:22px;
 }
