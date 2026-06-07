@@ -302,17 +302,25 @@ function catchPokemon() {
     success = Math.random() * 100 < catchCount * 20;
   }
 
-  if (success) {
+if (success) {
 
-    savePokemon();
-    catchCount = 0;
+  savePokemon();
 
-    message.textContent = `${currentPokemon.name}をゲットだぜ！`;
+  catchCount = 0;
 
-    questionArea.classList.add("hidden");
-    catchArea.classList.add("hidden");
+  catchEffect.classList.remove("catch-show");
 
-    nextArea.classList.remove("hidden");
+  void catchEffect.offsetWidth;
+
+  catchEffect.classList.add("catch-show");
+
+  message.textContent = "";
+
+  questionArea.classList.add("hidden");
+
+  catchArea.classList.add("hidden");
+
+  nextArea.classList.remove("hidden");
 
 } else {
 
