@@ -366,7 +366,9 @@ header {
 
 .numberRow{
   display:flex;
+  flex-direction:row;
   justify-content:center;
+  align-items:center;
 }
 
 .numberRow img{
