@@ -93,6 +93,39 @@
             1 + 1 = ?
         </h2>
 
+    <!-- 問題エリア -->
+
+    <div id="questionArea">
+
+        <h2 id="question">
+            1 + 1 = ?
+        </h2>
+        
+        <div id="visualQuestion"></div>
+    
+        <input
+            id="answerInput"
+            type="number"
+            autocomplete="off"
+        >
+
+        <br><br>
+
+        <button
+            id="answerButton"
+            onclick="checkAnswer()"
+        >
+            こたえる
+        </button>
+        
+		<button onclick="changePokemon()">
+			べつのポケモンにする
+		</button>
+		
+    </div>
+    
+    <!-- 捕獲エリア -->
+
         <input
             id="answerInput"
             type="number"
