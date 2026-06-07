@@ -160,6 +160,17 @@ function createQuestion() {
   question.textContent =
     `${a} + ${b} = ?`;
 
+  const maxCount = Math.max(a, b);
+
+  // 画面幅に合わせてサイズ計算
+  const availableWidth = window.innerWidth * 0.35;
+
+  let pokemonSize =
+    Math.floor(availableWidth / Math.min(maxCount, 5));
+
+  pokemonSize = Math.max(24, pokemonSize);
+  pokemonSize = Math.min(60, pokemonSize);
+
   const img =
     getPokemonImage(
       currentPokemon.pokemonId
@@ -169,18 +180,23 @@ function createQuestion() {
 
     let html = '<div class="numberGroup">';
 
-    for(let row=0; row < Math.ceil(count/5); row++){
+    for(let row = 0; row < Math.ceil(count / 5); row++){
 
       html += '<div class="numberRow">';
 
       const start = row * 5;
-      const end =
-        Math.min(start + 5, count);
+      const end = Math.min(start + 5, count);
 
-      for(let i=start; i<end; i++){
+      for(let i = start; i < end; i++){
 
         html += `
-          <img src="${img}">
+          <img
+            src="${img}"
+            style="
+              width:${pokemonSize}px;
+              height:${pokemonSize}px;
+            "
+          >
         `;
       }
 
@@ -192,14 +208,11 @@ function createQuestion() {
     return html;
   }
 
-  visualQuestion.innerHTML =
-    `
+  visualQuestion.innerHTML = `
     ${makeGroup(a)}
-
     <div class="plusSign">＋</div>
-
     ${makeGroup(b)}
-    `;
+  `;
 }
 
 // ====================
