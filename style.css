@@ -354,7 +354,7 @@ header {
   display:flex;
   justify-content:center;
   align-items:flex-start;
-  gap:10px;
+  gap:4px;
   margin:20px 0;
 }
 
