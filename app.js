@@ -163,8 +163,8 @@ function createQuestion() {
   const maxCount = Math.max(a, b);
 
   // 画面幅に合わせてサイズ計算
-  const availableWidth = window.innerWidth * 0.35;
-
+  const availableWidth = window.innerWidth * 0.45;
+  
   let pokemonSize =
     Math.floor(availableWidth / Math.min(maxCount, 5));
 
