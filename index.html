@@ -85,45 +85,37 @@
 
     </div>
 
-    <!-- 問題エリア -->
+<!-- 問題エリア -->
 
-    <div id="questionArea">
+<div id="questionArea">
 
-        <h2 id="question">
-            1 + 1 = ?
-        </h2>
+    <h2 id="question">
+        1 + 1 = ?
+    </h2>
 
-    <!-- 問題エリア -->
+    <div id="visualQuestion"></div>
 
-    <div id="questionArea">
+    <input
+        id="answerInput"
+        type="number"
+        autocomplete="off"
+    >
 
-        <h2 id="question">
-            1 + 1 = ?
-        </h2>
-        
-        <div id="visualQuestion"></div>
-    
-        <input
-            id="answerInput"
-            type="number"
-            autocomplete="off"
-        >
+    <br><br>
 
-        <br><br>
+    <button
+        id="answerButton"
+        onclick="checkAnswer()"
+    >
+        こたえる
+    </button>
 
-        <button
-            id="answerButton"
-            onclick="checkAnswer()"
-        >
-            こたえる
-        </button>
-        
-		<button onclick="changePokemon()">
-			べつのポケモンにする
-		</button>
-		
-    </div>
-    
+    <button onclick="changePokemon()">
+        べつのポケモンにする
+    </button>
+
+</div>
+
     <!-- 捕獲エリア -->
 
         <input
