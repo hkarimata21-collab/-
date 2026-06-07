@@ -152,17 +152,54 @@ function getRandomPokemon() {
 
 function createQuestion() {
 
-  const a =
-    Math.floor(Math.random() * 10) + 1;
-
-  const b =
-    Math.floor(Math.random() * 10) + 1;
+  const a = Math.floor(Math.random() * 10) + 1;
+  const b = Math.floor(Math.random() * 10) + 1;
 
   currentAnswer = a + b;
 
   question.textContent =
     `${a} + ${b} = ?`;
 
+  const img =
+    getPokemonImage(
+      currentPokemon.pokemonId
+    );
+
+  function makeGroup(count){
+
+    let html = '<div class="numberGroup">';
+
+    for(let row=0; row < Math.ceil(count/5); row++){
+
+      html += '<div class="numberRow">';
+
+      const start = row * 5;
+      const end =
+        Math.min(start + 5, count);
+
+      for(let i=start; i<end; i++){
+
+        html += `
+          <img src="${img}">
+        `;
+      }
+
+      html += '</div>';
+    }
+
+    html += '</div>';
+
+    return html;
+  }
+
+  visualQuestion.innerHTML =
+    `
+    ${makeGroup(a)}
+
+    <div class="plusSign">＋</div>
+
+    ${makeGroup(b)}
+    `;
 }
 
 // ====================
