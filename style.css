@@ -298,9 +298,9 @@ header {
 
   font-weight: 900;
 
-  color: #ff2d2d;
+  color: white;
 
-  -webkit-text-stroke: 4px white;
+  -webkit-text-stroke: 3px #ff2d2d;
 
   text-shadow:
     0 4px 0 #d40000,
