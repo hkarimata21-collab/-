@@ -294,17 +294,17 @@ header {
 
   transform: translateX(-50%);
 
-  font-size: 42px;
+  font-size: 45px;
 
   font-weight: 900;
 
   color: #ff2d2d;
 
-  -webkit-text-stroke: 2px white;
+  -webkit-text-stroke: 1px white;
 
-  text-shadow:
+  /*text-shadow:
     0 4px 0 #d40000,
-    0 6px 8px rgba(0,0,0,0.4);
+    0 6px 8px rgba(0,0,0,0.4);*/
 
   z-index: 30;
 
