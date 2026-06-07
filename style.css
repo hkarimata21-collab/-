@@ -356,7 +356,6 @@ header {
   align-items:flex-start;
   gap:24px;
   margin:20px 0;
-  flex-wrap:wrap;
 }
 
 .numberGroup{
@@ -368,18 +367,30 @@ header {
 .numberRow{
   display:flex;
   justify-content:center;
-  min-height:50px;
 }
 
 .numberRow img{
-  width:50px;
-  height:50px;
+  width:56px;
+  height:56px;
   image-rendering:pixelated;
 }
 
 .plusSign{
   font-size:56px;
   font-weight:bold;
-  line-height:1;
-  margin-top:22px;
+  margin-top:20px;
+}
+
+/* iPad */
+@media (min-width: 768px) {
+
+  .numberRow img{
+    width:72px;
+    height:72px;
+  }
+
+  .plusSign{
+    font-size:72px;
+  }
+
 }
