@@ -279,3 +279,73 @@ header {
     font-size: 28px;
   }
 }
+
+/* =====================
+   ゲットだぜ演出
+===================== */
+
+#catchEffect {
+
+  position: absolute;
+
+  left: 50%;
+
+  bottom: 140px;
+
+  transform: translateX(-50%);
+
+  font-size: 42px;
+
+  font-weight: 900;
+
+  color: #ff2d2d;
+
+  -webkit-text-stroke: 4px white;
+
+  text-shadow:
+    0 4px 0 #d40000,
+    0 6px 8px rgba(0,0,0,0.4);
+
+  z-index: 30;
+
+  display: none;
+
+  white-space: nowrap;
+
+  font-family:
+    "Arial Rounded MT Bold",
+    "Hiragino Maru Gothic ProN",
+    "Yu Gothic",
+    sans-serif;
+}
+
+.catch-show {
+
+  display: block !important;
+
+  animation: catchPop 1.2s ease-out forwards;
+
+}
+
+@keyframes catchPop {
+
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.3);
+  }
+
+  40% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.4);
+  }
+
+  60% {
+    transform: translateX(-50%) scale(1.15);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+
+}
