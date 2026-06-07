@@ -354,7 +354,7 @@ header {
   display:flex;
   justify-content:center;
   align-items:flex-start;
-  gap:10px;
+  gap:5px;
   margin:20px 0;
 }
 
@@ -371,13 +371,13 @@ header {
 }
 
 .numberRow img{
-  width:30px;
-  height:30px;
+  width:35px;
+  height:35px;
   image-rendering:pixelated;
 }
 
 .plusSign{
-  font-size:56px;
+  font-size:40px;
   font-weight:bold;
   margin-top:20px;
 }
