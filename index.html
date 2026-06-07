@@ -116,45 +116,21 @@
 
 </div>
 
-    <!-- 捕獲エリア -->
+<!-- 捕獲エリア -->
 
-        <input
-            id="answerInput"
-            type="number"
-            autocomplete="off"
-        >
+<div
+    id="catchArea"
+    class="hidden"
+>
 
-        <br><br>
-
-        <button
-            id="answerButton"
-            onclick="checkAnswer()"
-        >
-            こたえる
-        </button>
-        
-		<button onclick="changePokemon()">
-			べつのポケモンにする
-		</button>
-		
-    </div>
-
-    <!-- 捕獲エリア -->
-
-    <div
-        id="catchArea"
-        class="hidden"
+    <button
+        id="throwButton"
+        onclick="throwBall()"
     >
+        モンスターボールをなげる！
+    </button>
 
-        <button
-            id="throwButton"
-            onclick="throwBall()"
-        >
-            モンスターボールをなげる！
-        </button>
-
-    </div>
-
+</div>
     <!-- 次へ -->
 
     <div
