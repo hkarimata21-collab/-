@@ -136,32 +136,27 @@ function getPokemonImage(id) {
   return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 }
 
-async function playCry(id) {
+function playCry(id) {
 
-  try {
+  const cry =
+    new Audio(
+      `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${id}.ogg`
+    );
 
-    const res =
-      await fetch(
-        `https://pokeapi.co/api/v2/pokemon/${id}`
-      );
+  cry.volume = 1.0;
 
-    const data = await res.json();
+  cry.addEventListener("canplaythrough", () => {
+    console.log("読み込み成功");
+  });
 
-    const cryUrl =
-      data.cries.latest;
+  cry.addEventListener("error", (e) => {
+    console.log("音声エラー", e);
+  });
 
-    const cry =
-      new Audio(cryUrl);
+  cry.play()
+    .then(() => console.log("再生成功"))
+    .catch(err => console.log("再生失敗", err));
 
-    cry.volume = 0.7;
-
-    await cry.play();
-
-  } catch(err) {
-
-    console.log(err);
-
-  }
 }
 
 // ====================
