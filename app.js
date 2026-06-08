@@ -255,10 +255,14 @@ function loadPokemon() {
   pokemonName.textContent =
     currentPokemon.name;
 
-  pokemonImage.src =
-    getPokemonImage(
-      currentPokemon.pokemonId
-    );
+pokemonImage.src =
+  getPokemonImage(
+    currentPokemon.pokemonId
+  );
+
+setTimeout(() => {
+  playCry(currentPokemon.pokemonId);
+}, 300);
 
   answerInput.value = "";
 
