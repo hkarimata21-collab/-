@@ -279,9 +279,11 @@ setTimeout(() => {
 
 function changePokemon() {
 
-    catchCount = 0;
+  catchCount = 0;
 
-    loadPokemon();
+  loadPokemon();
+
+  playCry(currentPokemon.pokemonId);
 
 }
 
@@ -355,8 +357,10 @@ function nextPokemon() {
 
   catchEffect.classList.remove("catch-show");
   catchEffect.style.display = "none";
-  
+
   loadPokemon();
+
+  playCry(currentPokemon.pokemonId);
 
   ballImg.style.display = "none";
   ballImg.classList.remove("shake-3");
