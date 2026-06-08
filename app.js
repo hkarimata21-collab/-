@@ -499,20 +499,23 @@ function showPokemon(no) {
     );
 
   dexContent.innerHTML = `
-    <button onclick="renderDex()">
-      ← もどる
-    </button>
+  <button onclick="renderDex()">
+    ← もどる
+  </button>
 
-    <h3>${p.name}</h3>
+  <h3>${p.name}</h3>
 
-    <img
-      src="${getPokemonImage(p.pokemonId)}"
-      width="180"
-      onclick="playCry(${p.pokemonId})"
-      style="cursor:pointer;"
-    >
-    <p>なきごえ</p>
-  `;
+  <img
+    src="${getPokemonImage(p.pokemonId)}"
+    width="180"
+  >
+
+  <br><br>
+
+  <button onclick="playCry(${p.pokemonId})">
+    🔊 なきごえ
+  </button>
+`;
 
 }
 
