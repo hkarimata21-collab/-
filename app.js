@@ -136,6 +136,18 @@ function getPokemonImage(id) {
   return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 }
 
+function playCry(id) {
+
+  const cryUrl =
+    `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${id}.ogg`;
+
+  const cry = new Audio(cryUrl);
+
+  cry.volume = 0.7;
+
+  cry.play().catch(() => {});
+}
+
 // ====================
 // ランダムポケモン
 // ====================
@@ -485,7 +497,10 @@ function showPokemon(no) {
     <img
       src="${getPokemonImage(p.pokemonId)}"
       width="180"
+      onclick="playCry(${p.pokemonId})"
+      style="cursor:pointer;"
     >
+    <p>なきごえ</p>
   `;
 
 }
