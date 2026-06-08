@@ -411,3 +411,13 @@ header {
 #dexContent img:active{
   transform: scale(0.95);
 }
+
+.cryButton{
+  background:#ffcb05;
+  border:none;
+  border-radius:12px;
+  padding:12px 20px;
+  font-size:20px;
+  font-weight:bold;
+  cursor:pointer;
+}
