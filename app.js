@@ -119,6 +119,8 @@ const pokemonList = [
 let currentPokemon = null;
 let currentAnswer = 0;
 let catchCount = 0;
+const correctSound = new Audio("correct.mp3");
+const wrongSound = new Audio("wrong.mp3");
 
 // ====================
 // 初期化
@@ -298,7 +300,10 @@ function checkAnswer() {
   if (value === "") return;
 
   if (Number(value) === currentAnswer) {
-
+    
+    correctSound.currentTime = 0;
+    correctSound.play();
+    
     questionArea.classList.add("hidden");
 
     catchArea.classList.remove("hidden");
@@ -306,8 +311,10 @@ function checkAnswer() {
     message.textContent = "せいかい！";
 
   } else {
-
-    // ❌不正解 → 絶対にボール出さない
+    wrongSound.currentTime = 0;
+    wrongSound.play();
+    
+    // ❌不正解 →ボール出さない
     catchArea.classList.add("hidden");
     nextArea.classList.add("hidden");
 
