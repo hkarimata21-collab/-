@@ -161,6 +161,16 @@ function playCry(id) {
 
 }
 
+function playSound(file){
+
+  const sound = new Audio(file);
+
+  sound.volume = 1.0;
+
+  sound.play().catch(() => {});
+
+}
+
 // ====================
 // ランダムポケモン
 // ====================
@@ -330,6 +340,8 @@ function throwBall() {
 
   message.textContent = "";
 
+  playSound("throw.mp3");
+
   ballImg.style.display = "block";
 
   // throwアニメーションリセット
@@ -344,7 +356,7 @@ function throwBall() {
 
   // ★着地後に3回揺れ
   setTimeout(() => {
-
+    playSound("shake.mp3");
     ballImg.classList.add("shake-3");
 
   }, 1000);
@@ -394,7 +406,9 @@ function catchPokemon() {
   }
 
 if (success) {
-
+  
+  playSound("catch.mp3");
+  
   savePokemon();
 
   catchCount = 0;
@@ -405,6 +419,12 @@ if (success) {
 
   catchEffect.classList.add("catch-show");
 
+  setTimeout(() => {
+  
+    playSound("get.mp3");
+  
+  }, 500);
+
   message.textContent = "";
 
   questionArea.classList.add("hidden");
@@ -414,7 +434,8 @@ if (success) {
   nextArea.classList.remove("hidden");
 
 } else {
-
+  playSound("escape.mp3");
+  
   ballImg.style.display = "none";
 
   pokemonImage.style.display = "block";
