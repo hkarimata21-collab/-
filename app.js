@@ -387,10 +387,10 @@ function catchPokemon() {
 
   let success = false;
 
-  if (catchCount >= 5) {
+  if (catchCount >= 3) {
     success = true;
   } else {
-    success = Math.random() * 100 < catchCount * 20;
+    success = Math.random() * 100 < catchCount * 33.3333;
   }
 
 if (success) {
