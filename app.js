@@ -161,11 +161,12 @@ function playCry(id) {
 
 }
 
-function playSound(file){
+function playSound(file, speed = 1){
 
   const sound = new Audio(file);
 
   sound.volume = 1.0;
+  sound.playbackRate = speed;
 
   sound.play().catch(() => {});
 
@@ -340,7 +341,7 @@ function throwBall() {
 
   message.textContent = "";
 
-  playSound("throw.mp3");
+  playSound("throw.mp3",2.0);
 
   ballImg.style.display = "block";
 
@@ -368,17 +369,17 @@ function throwBall() {
   
     ballImg.classList.add("shake-3");
 
-  }, 3000);
+  }, 1000);
 
   // ポケモン非表示
   setTimeout(() => {
     pokemonImage.style.display = "none";
-  }, 3000);
+  }, 1000);
 
   // 捕獲判定
   setTimeout(() => {
     catchPokemon();
-  }, 6100);
+  }, 4100);
 }
 
 function nextPokemon() {
