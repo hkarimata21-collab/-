@@ -133,7 +133,7 @@ header {
 /* 投げアニメーション */
 .throw {
   display: block !important;
-  animation: throwBall 4s ease-out forwards;
+  animation: throwBall 5s ease-out forwards;
 }
 
 @keyframes throwBall {
@@ -160,7 +160,7 @@ header {
 
 /* ★3回揺れ */
 .shake-3 {
-  animation: shake3 0.8s ease-in-out 3;
+  animation: shake3 1s ease-in-out 3;
 }
 
 /* =====================
