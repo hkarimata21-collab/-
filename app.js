@@ -357,14 +357,14 @@ function throwBall() {
 
   // ★着地後に3回揺れ
   setTimeout(() => {
-    playSound("shake.mp3");
+    playSound("shake.mp3",1.2);
 
   setTimeout(() => {
-    playSound("shake.mp3");
+    playSound("shake.mp3",1.2);
   }, 1000);
   
   setTimeout(() => {
-    playSound("shake.mp3");
+    playSound("shake.mp3",1.2);
   }, 2000);
   
     ballImg.classList.add("shake-3");
@@ -444,7 +444,7 @@ if (success) {
   nextArea.classList.remove("hidden");
 
 } else {
-  playSound("escape.mp3");
+  playSound("escape.mp3",2.5);
   
   ballImg.style.display = "none";
 
