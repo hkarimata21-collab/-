@@ -356,7 +356,7 @@ function throwBall() {
 
   // ★着地後に3回揺れ
   setTimeout(() => {
-    //playSound("shake.mp3");
+    playSound("shake.mp3");
     ballImg.classList.add("shake-3");
 
   }, 3000);
@@ -369,7 +369,7 @@ function throwBall() {
   // 捕獲判定
   setTimeout(() => {
     catchPokemon();
-  }, 4100);
+  }, 6100);
 }
 
 function nextPokemon() {
