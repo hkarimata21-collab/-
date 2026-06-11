@@ -359,12 +359,12 @@ function throwBall() {
     //playSound("shake.mp3");
     ballImg.classList.add("shake-3");
 
-  }, 1000);
+  }, 3000);
 
   // ポケモン非表示
   setTimeout(() => {
     pokemonImage.style.display = "none";
-  }, 1000);
+  }, 3000);
 
   // 捕獲判定
   setTimeout(() => {
