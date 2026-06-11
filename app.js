@@ -357,6 +357,15 @@ function throwBall() {
   // ★着地後に3回揺れ
   setTimeout(() => {
     playSound("shake.mp3");
+
+  setTimeout(() => {
+    playSound("shake.mp3");
+  }, 1000);
+  
+  setTimeout(() => {
+    playSound("shake.mp3");
+  }, 2000);
+  
     ballImg.classList.add("shake-3");
 
   }, 3000);
