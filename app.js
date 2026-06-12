@@ -325,44 +325,38 @@ function createQuestion() {
       currentPokemon.pokemonId
     );
 
-  function makeGroup(count){
+function makeGroup(count){
 
-    let html = '<div class="numberGroup">';
+  let html = '<div class="numberGroup">';
 
-    for(let row = 0; row < Math.ceil(count / 5); row++){
+  for(let row = 0; row < Math.ceil(count / 5); row++){
 
-      html += '<div class="numberRow">';
+    html += '<div class="numberRow">';
 
-      const start = row * 5;
-      const end = Math.min(start + 5, count);
+    const start = row * 5;
+    const end = Math.min(start + 5, count);
 
-      for(let i = start; i < end; i++){
+    for(let i = start; i < end; i++){
 
-        html += `
-          <img
-            src="${img}"
-            style="
-              width:${pokemonSize}px;
-              height:${pokemonSize}px;
-            "
-          >
-        `;
-      }
-
-      html += '</div>';
+      html += `
+        <img
+          src="${img}"
+          style="
+            width:${pokemonSize}px;
+            height:${pokemonSize}px;
+          "
+        >
+      `;
     }
 
     html += '</div>';
-
-    return html;
-    
-    if(!hintUsed){
-    visualQuestion.innerHTML = "";
-    return;
-}
-    
   }
 
+  html += '</div>';
+
+  return html;
+}
+    
   if(hintUsed){
   
     visualQuestion.innerHTML = `
@@ -419,9 +413,10 @@ setTimeout(() => {
 
   message.textContent =
     `${currentPokemon.name}が あらわれた！`;
-
-  createQuestion();
+    
   hintUsed = false;
+  createQuestion();
+
 }
 
 function changePokemon() {
