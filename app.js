@@ -355,6 +355,12 @@ function createQuestion() {
     html += '</div>';
 
     return html;
+    
+    if(!hintUsed){
+    visualQuestion.innerHTML = "";
+    return;
+}
+    
   }
 
   if(hintUsed){
@@ -372,6 +378,13 @@ function createQuestion() {
   }
 }
 
+function showHint(){
+
+  hintUsed = true;
+
+  createQuestion();
+
+}
 // ====================
 // ポケモン出現
 // ====================
