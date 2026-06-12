@@ -231,6 +231,7 @@ const pokemonList = [
 let currentPokemon = null;
 let currentAnswer = 0;
 let catchCount = 0;
+let hintUsed = false;
 const correctSound = new Audio("correct.mp3");
 const wrongSound = new Audio("wrong.mp3");
 
@@ -356,11 +357,19 @@ function createQuestion() {
     return html;
   }
 
-  visualQuestion.innerHTML = `
-    ${makeGroup(a)}
-    <div class="plusSign">＋</div>
-    ${makeGroup(b)}
-  `;
+  if(hintUsed){
+  
+    visualQuestion.innerHTML = `
+      ${makeGroup(a)}
+      <div class="plusSign">＋</div>
+      ${makeGroup(b)}
+    `;
+  
+  }else{
+  
+    visualQuestion.innerHTML = "";
+
+  }
 }
 
 // ====================
@@ -399,7 +408,7 @@ setTimeout(() => {
     `${currentPokemon.name}が あらわれた！`;
 
   createQuestion();
-
+  hintUsed = false;
 }
 
 function changePokemon() {
