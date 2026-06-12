@@ -232,10 +232,13 @@ let currentPokemon = null;
 let currentAnswer = 0;
 let catchCount = 0;
 let hintUsed = false;
-const correctSound = new Audio("correct.mp3");
-const wrongSound = new Audio("wrong.mp3");
 
-// ====================
+let currentA = 0;
+let currentB = 0;
+
+const correctSound = new Audio("correct.mp3");
+const wrongSound = new Audio("wrong.mp3");// ====================
+
 // 初期化
 // ====================
 
@@ -301,8 +304,18 @@ function getRandomPokemon() {
 
 function createQuestion() {
 
-  const a = Math.floor(Math.random() * 10) + 1;
-  const b = Math.floor(Math.random() * 10) + 1;
+  if(!hintUsed){
+
+    currentA =
+      Math.floor(Math.random() * 10) + 1;
+
+    currentB =
+      Math.floor(Math.random() * 10) + 1;
+
+  }
+
+  const a = currentA;
+  const b = currentB;
 
   currentAnswer = a + b;
 
@@ -311,62 +324,79 @@ function createQuestion() {
 
   const maxCount = Math.max(a, b);
 
-  // 画面幅に合わせてサイズ計算
-  const availableWidth = window.innerWidth * 0.45;
-  
-  let pokemonSize =
-    Math.floor(availableWidth / Math.min(maxCount, 5));
+  const availableWidth =
+    window.innerWidth * 0.45;
 
-  pokemonSize = Math.max(24, pokemonSize);
-  pokemonSize = Math.min(60, pokemonSize);
+  let pokemonSize =
+    Math.floor(
+      availableWidth /
+      Math.min(maxCount, 5)
+    );
+
+  pokemonSize =
+    Math.max(24, pokemonSize);
+
+  pokemonSize =
+    Math.min(60, pokemonSize);
 
   const img =
     getPokemonImage(
       currentPokemon.pokemonId
     );
 
-function makeGroup(count){
+  function makeGroup(count){
 
-  let html = '<div class="numberGroup">';
+    let html =
+      '<div class="numberGroup">';
 
-  for(let row = 0; row < Math.ceil(count / 5); row++){
+    for(
+      let row = 0;
+      row < Math.ceil(count / 5);
+      row++
+    ){
 
-    html += '<div class="numberRow">';
+      html +=
+        '<div class="numberRow">';
 
-    const start = row * 5;
-    const end = Math.min(start + 5, count);
+      const start = row * 5;
+      const end =
+        Math.min(start + 5, count);
 
-    for(let i = start; i < end; i++){
+      for(
+        let i = start;
+        i < end;
+        i++
+      ){
 
-      html += `
-        <img
-          src="${img}"
-          style="
-            width:${pokemonSize}px;
-            height:${pokemonSize}px;
-          "
-        >
-      `;
+        html += `
+          <img
+            src="${img}"
+            style="
+              width:${pokemonSize}px;
+              height:${pokemonSize}px;
+            "
+          >
+        `;
+      }
+
+      html += '</div>';
     }
 
     html += '</div>';
+
+    return html;
   }
 
-  html += '</div>';
-
-  return html;
-}
-    
   if(hintUsed){
-  
+
     visualQuestion.innerHTML = `
       ${makeGroup(a)}
       <div class="plusSign">＋</div>
       ${makeGroup(b)}
     `;
-  
+
   }else{
-  
+
     visualQuestion.innerHTML = "";
 
   }
@@ -375,6 +405,9 @@ function makeGroup(count){
 function showHint(){
 
   hintUsed = true;
+
+  hintButton.style.display =
+    "none";
 
   createQuestion();
 
@@ -414,8 +447,13 @@ setTimeout(() => {
   message.textContent =
     `${currentPokemon.name}が あらわれた！`;
     
-  hintUsed = false;
-  createQuestion();
+hintUsed = false;
+
+hintButton.style.display =
+
+  "inline-block";
+
+createQuestion();
 
 }
 
