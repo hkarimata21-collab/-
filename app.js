@@ -238,8 +238,9 @@ let currentA = 0;
 let currentB = 0;
 
 const correctSound = new Audio("correct.mp3");
-const wrongSound = new Audio("wrong.mp3");// ====================
+const wrongSound = new Audio("wrong.mp3");
 
+// ====================
 // 初期化
 // ====================
 
